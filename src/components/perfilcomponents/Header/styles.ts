@@ -10,10 +10,11 @@ export const HeroContainer = styled.header`
   padding: 0 170px;
 `
 
-export const RestaurantSpan = styled.span`
+export const RestaurantsLink = styled.a`
   font-weight: 900;
   font-size: 18px;
   align-items: center;
+  cursor: pointer;
 `
 
 export const CarrinhoSpan = styled.span`

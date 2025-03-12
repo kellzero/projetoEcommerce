@@ -12,7 +12,8 @@ export const HeroContainer = styled.header`
 export const Logo = styled.img`
   width: 124px;
   height: 60px;
-  margin-bottom: 140px;
+  margin-top: 70px;
+  margin-bottom: 90px;
 `
 export const HeroText = styled.h1`
   text-align: center;

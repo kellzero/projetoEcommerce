@@ -14,8 +14,10 @@ import {
 import sushi from '../../../assets/Images/sushi hioki.png'
 import italiana from '../../../assets/Images/italiana.png'
 import estrela from '../../../assets/Images/estrela.png'
+import { useNavigate } from 'react-router-dom'
 
 const Listagem = () => {
+  const navigate = useNavigate()
   const items = [
     {
       id: 1,
@@ -97,7 +99,7 @@ const Listagem = () => {
             </CardRating>
           </CardRatingContainer>
           <CardDescription>{item.description}</CardDescription>
-          <Button>Saiba mais</Button>
+          <Button onClick={() => navigate(`/perfil/`)}>Saiba mais</Button>
         </CardContainer>
       ))}
     </ListContainer>

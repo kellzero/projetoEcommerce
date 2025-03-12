@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux'
-import { openModal } from '../../redux/modalSlice'
 import {
   Button,
   CardContainer,
@@ -9,9 +7,11 @@ import {
   ListContainer
 } from './style'
 import pizza from '../../../assets/Images/pizza.png'
+import Modal from '../Modal/Modal'
+import { useState } from 'react'
 
-const PerfilList = () => {
-  const dispatch = useDispatch()
+const PerfilList: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false)
   const items = [
     {
       id: 1,
@@ -64,9 +64,8 @@ const PerfilList = () => {
           <CardImage src={item.image} alt={item.name} />
           <CardName>{item.name}</CardName>
           <CardDescription>{item.description}</CardDescription>
-          <Button onClick={() => dispatch(openModal())}>
-            Adicionar ao carrinho
-          </Button>
+          <Button onClick={() => setIsOpen(true)}>Adicionar ao carrinho</Button>
+          <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}></Modal>
         </CardContainer>
       ))}
     </ListContainer>

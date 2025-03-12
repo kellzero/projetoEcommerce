@@ -3,14 +3,18 @@ import {
   HeroContainer,
   HeroLayout,
   Logo,
-  RestaurantSpan
+  RestaurantsLink
 } from './styles'
 import logo from '../../../assets/Images/logo.png'
+import { useNavigate } from 'react-router-dom'
 
 const PerfilHeader = () => {
+  const navigate = useNavigate()
   return (
     <HeroContainer>
-      <RestaurantSpan>Restaurantes</RestaurantSpan>
+      <RestaurantsLink onClick={() => navigate(`/`)}>
+        Restaurantes
+      </RestaurantsLink>
       <HeroLayout>
         <Logo src={logo} alt="eFood-Logo" />
       </HeroLayout>
