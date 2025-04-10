@@ -5,15 +5,14 @@ export const HeroContainer = styled.header`
   display: flex;
   height: 186px;
   justify-content: center;
+  width: 100%;
   background: url(${fundo}) no-repeat center center/cover;
   align-items: center;
-  padding: 0 170px;
 `
 
 export const RestaurantsLink = styled.a`
   font-weight: 900;
   font-size: 18px;
-  align-items: center;
   cursor: pointer;
 `
 
@@ -31,8 +30,8 @@ export const Logo = styled.img`
   margin: 0 58px;
 `
 export const HeroLayout = styled.div`
-  width: 540px;
+  width: 696px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 `

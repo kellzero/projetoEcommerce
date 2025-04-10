@@ -3,9 +3,11 @@ import pedidoReducer from './pedidoSlice'
 
 type ItemCarrinho = {
   id: number
-  name: string
-  price: number
-  image: string
+  preco: number
+  nome: string
+  foto: string
+  descricao: string
+  porcao: string
 }
 
 const initialState: {
@@ -24,7 +26,8 @@ const CarrinhoSlice = createSlice({
   reducers: {
     adicionarItem: (state, action: { payload: ItemCarrinho }) => {
       state.items.push(action.payload)
-      state.total += action.payload.price
+      state.total += action.payload.preco
+      state.isOpen = true
     },
 
     removerItem: (state, action: { payload: number }) => {
@@ -32,17 +35,32 @@ const CarrinhoSlice = createSlice({
         (item) => item.id === action.payload
       )
       if (itemIndex !== -1) {
-        state.total -= state.items[itemIndex].price
+        state.total -= state.items[itemIndex].preco
         state.items.splice(itemIndex, 1)
+        if (state.items.length === 0) {
+          state.isOpen = false
+        }
       }
+    },
+    abrirCarrinho: (state) => {
+      state.isOpen = true
+    },
+    fecharCarrinho: (state) => {
+      console.log('Fechando carrinho...')
+      state.isOpen = false
     },
     toggleCarrinho: (state) => {
       state.isOpen = !state.isOpen
     }
   }
 })
-export const { adicionarItem, removerItem, toggleCarrinho } =
-  CarrinhoSlice.actions
+export const {
+  adicionarItem,
+  removerItem,
+  toggleCarrinho,
+  abrirCarrinho,
+  fecharCarrinho
+} = CarrinhoSlice.actions
 const store = configureStore({
   reducer: {
     carrinho: CarrinhoSlice.reducer,

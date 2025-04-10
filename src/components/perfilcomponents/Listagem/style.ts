@@ -1,24 +1,30 @@
 import styled from 'styled-components'
 import { cores } from '../../../styles'
 
-export const ListContainer = styled.section`
+export const ListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
   gap: 32px;
-  margin: 80px auto;
+  margin: 170px auto;
   padding: 40px auto;
-  max-width: 1366px;
+  max-width: 1024px;
 `
 export const CardContainer = styled.ul`
   width: 320px;
-  height: 340px;
+  min-height: 340px;
   background-color: ${cores.CorPrincipal};
   position: relative;
+  padding-bottom: 56px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 56px;
+  overflow: hidden;
 `
 
 export const CardImage = styled.img`
-  width: 320px;
-  height: auto;
+  width: 100%;
+  height: 167px;
   padding: 8px;
   object-fit: cover;
 `
@@ -33,20 +39,27 @@ export const CardDescription = styled.p`
   font-size: 14px;
   line-height: 22px;
   color: ${cores.Corfundo};
-  margin-top: 8px;
-  margin-left: 8px;
+  margin: 8px;
+  flex-grow: 1;
+  overflow: hidden;
 `
 export const Button = styled.button`
-  width: 300px;
+  position: absolute;
+  bottom: 8px;
+  width: calc(100% - 16px);
   height: 24px;
+  margin: 8px;
   background: #ffebd9;
   color: #f05657;
   border: none;
   cursor: pointer;
   font-size: 14px;
-  margin: 8px;
-  margin-top: 24px;
   &:hover {
     background: #ffebd9;
   }
+`
+export const CardGroup = styled.div`
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 32px;
 `

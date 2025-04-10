@@ -11,94 +11,32 @@ import {
   ListContainer,
   StarIcon
 } from './style'
-import sushi from '../../../assets/Images/sushi hioki.png'
-import italiana from '../../../assets/Images/italiana.png'
 import estrela from '../../../assets/Images/estrela.png'
 import { useNavigate } from 'react-router-dom'
+import { useRestaurants } from '../../../hooks/useEfoodApi'
 
 const Listagem = () => {
+  const { restaurants, loading, error } = useRestaurants()
   const navigate = useNavigate()
-  const items = [
-    {
-      id: 1,
-      name: 'Hioki Sushi ',
-      image: sushi,
-      type: 'Japonesa',
-      description:
-        'Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!',
-      rating: 4.5,
-      destaque: 'Destaque da semana'
-    },
 
-    {
-      id: 2,
-      name: 'La Dolce Vita Trattoria',
-      image: italiana,
-      type: 'Italiana',
-      description:
-        'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-      rating: 1.6
-    },
+  if (loading) return <div>Carregando...</div>
+  if (error) return <div>Erro: {error.message}</div>
 
-    {
-      id: 3,
-      name: 'Hioki Sushi ',
-      image: sushi,
-      type: 'Japonesa',
-      description:
-        'Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!',
-
-      rating: 4.5
-    },
-
-    {
-      id: 4,
-      name: 'La Dolce Vita Trattoria',
-      image: italiana,
-      type: 'Italiana',
-      description:
-        'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-
-      rating: 1.6
-    },
-
-    {
-      id: 5,
-      name: 'Hioki Sushi ',
-      image: sushi,
-      type: 'Japonesa',
-      description:
-        'Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!',
-
-      rating: 4.5
-    },
-
-    {
-      id: 6,
-      name: 'La Dolce Vita Trattoria',
-      image: italiana,
-      type: 'Italiana',
-      description:
-        'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-
-      rating: 1.6
-    }
-  ]
   return (
     <ListContainer>
-      {items.map((item, index) => (
-        <CardContainer key={item.id}>
-          <CardImage src={item.image} alt={item.name} />
-          <Cardtype>{item.type}</Cardtype>
-          {index === 0 && <DestaqueCard>{item.destaque}</DestaqueCard>}
+      {restaurants.map((restaurants, index) => (
+        <CardContainer key={restaurants.id}>
+          <CardImage src={restaurants.capa} alt={restaurants.titulo} />
+          <Cardtype>{restaurants.tipo}</Cardtype>
+          {index === 0 && <DestaqueCard>Destaque</DestaqueCard>}
           <CardRatingContainer>
-            <CardName>{item.name}</CardName>
+            <CardName>{restaurants.titulo}</CardName>
             <CardRating>
-              {item.rating}
+              {restaurants.avaliacao}
               <StarIcon src={estrela} />
             </CardRating>
           </CardRatingContainer>
-          <CardDescription>{item.description}</CardDescription>
+          <CardDescription>{restaurants.descricao}</CardDescription>
           <Button onClick={() => navigate(`/perfil/`)}>Saiba mais</Button>
         </CardContainer>
       ))}

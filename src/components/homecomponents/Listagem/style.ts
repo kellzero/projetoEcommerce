@@ -11,9 +11,12 @@ export const ListContainer = styled.section`
 `
 export const CardContainer = styled.ul`
   width: 472px;
-  height: 398px;
+  min-height: 398px;
   border: 1px solid ${cores.CorPrincipal};
   position: relative;
+  display: flex:
+  flex-direction: column;
+  padding-bottom: 56px;
 `
 
 export const CardImage = styled.img`
@@ -34,6 +37,7 @@ export const Cardtype = styled.span`
   color: #ffebd9;
   padding: 4px 8px;
   font-size: 12px;
+  z-index: 1;
 `
 export const DestaqueCard = styled.span`
   display: flex;
@@ -49,6 +53,7 @@ export const DestaqueCard = styled.span`
   padding: 4px 8px;
   font-size: 12px;
   margin-right: 80px;
+  z-index: 1;
 `
 export const CardName = styled.h3`
   font-size: 18px;
@@ -60,8 +65,9 @@ export const CardDescription = styled.p`
   font-size: 14px;
   line-height: 24px;
   color: ${cores.CorPrincipal};
-  margin-top: 8px;
-  margin-left: 8px;
+  margin: 8px;
+  height: 120px;
+  overflow: hidden;
 `
 export const CardRatingContainer = styled.div`
   display: flex;
@@ -87,8 +93,10 @@ export const Button = styled.button`
   padding: 8px 16px;
   cursor: pointer;
   font-size: 14px;
-  margin: 8px auto;
-  margin-left: 8px;
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  margin: 0;
 
   &:hover {
     background: #f05657;

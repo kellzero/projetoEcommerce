@@ -1,26 +1,21 @@
 import { styled } from 'styled-components'
 import { cores } from '../../../styles'
 
-interface OverlayProps {
-  isOpen: boolean
-}
-
-export const Overlay = styled.div<OverlayProps>`
+export const Overlay = styled.div`
   position: fixed;
   top: 0;
   right: 0;
   width: 360px;
   height: 100%;
   background: ${cores.CorPrincipal};
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.8);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   padding: 20px;
-  transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(100%)')};
   transition: transform 0.3s ease-in-out;
-
   p {
     color: ${cores.Corfundo};
   }
 `
+
 export const ItemCarrinho = styled.div`
   display: flex;
   align-items: flex-start;
@@ -95,4 +90,19 @@ export const Confirmar = styled.button`
   border: none;
   cursor: pointer;
   margin-top: 16px;
+`
+
+export const Cbutton = styled.button`
+  background: ${cores.Corfundo};
+  color: ${cores.CorPrincipal};
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  z-index: 9999;
+`
+export const Wrapper = styled.div`
+  position: relative;
 `

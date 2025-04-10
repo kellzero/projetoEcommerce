@@ -1,22 +1,27 @@
-import { Provider, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Banner from '../../perfilcomponents/Banner'
 import Carrinho from '../../perfilcomponents/Carrinho'
 import PerfilFooter from '../../perfilcomponents/Footer'
 import PerfilHeader from '../../perfilcomponents/Header'
 import PerfilList from '../../perfilcomponents/Listagem'
-import store, { RootState } from '../../redux/store'
+import { RootState, fecharCarrinho } from '../../redux/store'
+import { useCallback } from 'react'
 
 const Perfil = () => {
-  const { isOpen } = useSelector((state: RootState) => state.carrinho)
+  const dispatch = useDispatch()
+  const isOpen = useSelector((state: RootState) => state.carrinho.isOpen)
+
+  const HandleCloseCart = useCallback(() => {
+    dispatch(fecharCarrinho())
+  }, [dispatch])
   return (
-    <Provider store={store}>
+    <>
       <PerfilHeader />
       <Banner />
       <PerfilList />
-      {isOpen && <Carrinho />}
+      {isOpen && <Carrinho isOpen={isOpen} onClose={HandleCloseCart} />}
       <PerfilFooter />
-    </Provider>
+    </>
   )
 }
-
 export default Perfil
