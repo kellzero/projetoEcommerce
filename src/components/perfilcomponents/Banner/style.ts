@@ -1,10 +1,10 @@
 import { styled } from 'styled-components'
 
-export const HeaderBanner = styled.div<{ image: string }>`
+export const HeaderBanner = styled.header<{ capa: string }>`
   position: relative;
   width: 100%;
   height: 300px;
-  background-image: url('${(props) => props.image}');
+  background-image: url('${(props) => props.capa}');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -30,8 +30,8 @@ font-weight: 900;`
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left; /* Alinha verticalmente */
-  justify-content: space-between; /* Separa os elementos */
+  align-items: left;
+  justify-content: space-between;
   gap: 156px;
-  width: 79%;
+  width: 1030px;
 `

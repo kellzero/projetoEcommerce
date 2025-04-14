@@ -37,7 +37,9 @@ const Listagem = () => {
             </CardRating>
           </CardRatingContainer>
           <CardDescription>{restaurants.descricao}</CardDescription>
-          <Button onClick={() => navigate(`/perfil/`)}>Saiba mais</Button>
+          <Button onClick={() => navigate(`/perfil/${restaurants.id}`)}>
+            Saiba mais
+          </Button>
         </CardContainer>
       ))}
     </ListContainer>

@@ -59,7 +59,5 @@ export const Button = styled.button`
   }
 `
 export const CardGroup = styled.div`
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  gap: 32px;
+  display: contents;
 `

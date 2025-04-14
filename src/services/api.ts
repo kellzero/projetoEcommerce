@@ -10,8 +10,8 @@ export const EfoodApi = {
     )
     return response.data
   },
-  async getRestaurantById(id: number): Promise<Restaurant[]> {
-    const response = await axios.get<Restaurant[]>(
+  async getRestaurantById(id: number): Promise<Restaurant> {
+    const response = await axios.get<Restaurant>(
       `${API_BASE_URL}/restaurantes/${id}`
     )
     return response.data
