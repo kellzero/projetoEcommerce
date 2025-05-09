@@ -46,7 +46,6 @@ const CarrinhoSlice = createSlice({
       state.isOpen = true
     },
     fecharCarrinho: (state) => {
-      console.log('Fechando carrinho...')
       state.isOpen = false
     },
     toggleCarrinho: (state) => {

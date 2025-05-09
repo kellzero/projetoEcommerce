@@ -5,15 +5,27 @@ export const Overlay = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  width: 360px;
+  width: 100%;
+  background: black;
+  opacity: 0.4;
   height: 100%;
-  background: ${cores.CorPrincipal};
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-  padding: 20px;
-  transition: transform 0.3s ease-in-out;
-  p {
-    color: ${cores.Corfundo};
-  }
+  z-index: 1000;
+`
+export const CartContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1000;
+`
+export const Sidebar = styled.aside`
+  background-color: ${cores.CorPrincipal};
+  z-index: 1001;
+  padding: 32px 8px 0 8px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.6);
 `
 
 export const ItemCarrinho = styled.div`

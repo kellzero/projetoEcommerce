@@ -9,12 +9,11 @@ import {
 } from './style'
 
 import Modal from '../Modal/Modal'
+import Carrinho from '../Carrinho'
 import { useEffect, useState } from 'react'
-import { useRestaurants } from '../../../hooks/useEfoodApi'
 import { MenuItem, Restaurant } from 'efood-api'
 import { useDispatch } from 'react-redux'
-import { adicionarItem } from '../../redux/store'
-import Carrinho from '../Carrinho'
+import { abrirCarrinho, adicionarItem } from '../../redux/store'
 import { useParams } from 'react-router-dom'
 import { EfoodApi } from '../../../services/api'
 
@@ -77,11 +76,15 @@ const PerfilList: React.FC = () => {
         onConfirm={() => {
           if (itemSelecionado) {
             dispatch(adicionarItem(itemSelecionado))
-            setCarrinhoOpen(true)
+            dispatch(abrirCarrinho())
           }
         }}
       />
-      <Carrinho isOpen={carrinhoOpen} onClose={() => setCarrinhoOpen(false)} />
+      <Carrinho
+        isOpen={carrinhoOpen}
+        onClose={() => setCarrinhoOpen(false)}
+        onConfirm={() => setCarrinhoOpen(true)}
+      />
     </>
   )
 }

@@ -11,7 +11,7 @@ import {
 import React from 'react'
 import { MenuItem } from 'efood-api'
 
-export interface ModalProps {
+interface ModalProps {
   isOpen: boolean
   onClose: () => void
   item: MenuItem | null
@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, item, onConfirm }) => {
 
   return (
     <Overlay onClick={onClose}>
-      <ModalContainer onClick={(e) => e.stopPropagation()}>
+      <ModalContainer>
         <CloseButton onClick={onClose}>x</CloseButton>
         <ModalImg src={item.foto} alt={item.nome} />
         <ModalContent>

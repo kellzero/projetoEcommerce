@@ -3,24 +3,51 @@ import { CepNum, Finalizado, Formulario, Overlay } from './styles'
 import Pagamento from '../Pagamento'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 interface EntregaProps {
   onVoltarCarrinho: () => void
   totalCarrinho: number
+  onClose: () => void
 }
 
-function Entrega({ onVoltarCarrinho, totalCarrinho }: EntregaProps) {
+function Entrega({ onVoltarCarrinho, totalCarrinho, onClose }: EntregaProps) {
   const [mostrarPagamento, setMostrarPagamento] = useState(false)
   const [compraFinalizada, setCompraFinalizada] = useState(false)
+
+  const form = useFormik({
+    initialValues: {
+      comprador: '',
+      endereco: '',
+      cidade: '',
+      cep: '',
+      enderecoNumber: ''
+    },
+    validationSchema: Yup.object({
+      comprador: Yup.string().required('O campo é obrigatório'),
+      endereco: Yup.string().required('O campo é obrigatório'),
+      cidade: Yup.string().required('O campo é obrigatório'),
+      cep: Yup.string().required('O campo é obrigatório'),
+      enderecoNumber: Yup.string().required('O campo é obrigatório')
+    }),
+    onSubmit: (values) => {
+      console.log(values)
+      setMostrarPagamento(true)
+    }
+  })
+  const getErrorMessage = (fieldName: string, message?: string) => {
+    const estaAlterado = fieldName in form.touched
+    const estaInvalido = fieldName in form.errors
+
+    if (estaAlterado && estaInvalido) return message
+    return ''
+  }
 
   const numeroPedido = useSelector(
     (state: RootState) => state.pedido.numeroPedido
   )
-  const handleContinuarPagamento = () => {
-    setMostrarPagamento(true)
-  }
-
   const handleVoltarEntrega = () => {
     setMostrarPagamento(false)
   }
@@ -32,7 +59,7 @@ function Entrega({ onVoltarCarrinho, totalCarrinho }: EntregaProps) {
 
   if (compraFinalizada) {
     return (
-      <Overlay isOpen={true}>
+      <Overlay>
         <Finalizado>
           <h2>
             {numeroPedido ? (
@@ -73,29 +100,81 @@ function Entrega({ onVoltarCarrinho, totalCarrinho }: EntregaProps) {
           totalCarrinho={totalCarrinho}
         />
       ) : (
-        <Overlay isOpen={true}>
+        <Overlay>
           <h2>Entrega</h2>
           <Formulario>
-            <label>
+            <label htmlFor="comprador">
               Quem irá receber
-              <input type="text" required />
+              <input
+                id="comprador"
+                type="text"
+                required
+                name="comprador"
+                value={form.values.comprador}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+              />
+              <small>
+                {getErrorMessage('comprador', form.errors.comprador)}
+              </small>
             </label>
-            <label>
+            <label htmlFor="endereco">
               Endereço
-              <input type="text" required />
+              <input
+                id="endereco"
+                type="text"
+                required
+                name="endereco"
+                value={form.values.endereco}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+              />
+              <small>{getErrorMessage('endereco', form.errors.endereco)}</small>
             </label>
-            <label>
+            <label htmlFor="cidade">
               Cidade
-              <input type="text" required />
+              <input
+                id="cidade"
+                type="text"
+                required
+                name="cidade"
+                value={form.values.cidade}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+              />
+              <small>{getErrorMessage('cidade', form.errors.cidade)}</small>
             </label>
             <CepNum>
-              <label>
+              <label htmlFor="cep">
                 CEP
-                <input type="text" required />
+                <input
+                  id="cep"
+                  type="text"
+                  required
+                  name="cep"
+                  value={form.values.cep}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+                <small>{getErrorMessage('cep', form.errors.cep)}</small>
               </label>
-              <label>
+              <label htmlFor="enderecoNumber">
                 Número
-                <input type="text" required />
+                <input
+                  id="enderecoNumber"
+                  type="text"
+                  required
+                  name="enderecoNumber"
+                  value={form.values.enderecoNumber}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
+                />
+                <small>
+                  {getErrorMessage(
+                    'enderecoNumber',
+                    form.errors.enderecoNumber
+                  )}
+                </small>
               </label>
             </CepNum>
             <label>
@@ -103,7 +182,7 @@ function Entrega({ onVoltarCarrinho, totalCarrinho }: EntregaProps) {
               <input type="text" />
             </label>
             <div className="botoes">
-              <button type="button" onClick={handleContinuarPagamento}>
+              <button type="button" onClick={() => form.handleSubmit()}>
                 Continuar com o pagamento
               </button>
               <button type="button" onClick={onVoltarCarrinho}>

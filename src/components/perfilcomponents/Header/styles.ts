@@ -20,6 +20,7 @@ export const CarrinhoSpan = styled.span`
   font-weight: 900;
   font-size: 18px;
   align-items: right;
+  cursor: pointer;
 `
 
 export const Logo = styled.img`
